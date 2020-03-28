@@ -44,7 +44,7 @@ public abstract class AbstractField {
         this.building = building;
         this.name=name;
     }
-    public AbstractField(Thing buriedThing, int startingSnow,String name) {
+    public AbstractField(Thing buriedThing, int startingSnow, List<AbstractField> neighbors, String name) {
         this(startingSnow, new ArrayList<>(), buriedThing, NoBuilding,name);
     }
 

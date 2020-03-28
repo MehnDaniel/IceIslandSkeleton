@@ -1,6 +1,9 @@
 package projlab.iceisland.model;
 
-public abstract class Player implements IActor {
+import static projlab.iceisland.model.Building.Igloo;
+import static projlab.iceisland.model.Player.PlayerState.*;
+
+public abstract class Player implements IUpdatable, IActor {
 
     protected int bodyHeat;
     protected int maxBodyHeat;
@@ -17,6 +20,11 @@ public abstract class Player implements IActor {
 
     public void buildingBuilt(Building building) {
     }
+
+    public enum PlayerState{
+        Normal, InIgloo, InWater
+    }
+
 
     public void step(int n) {
         currentField.stepTo(this, currentField.getNeighbor(n));
@@ -87,6 +95,13 @@ public abstract class Player implements IActor {
 
     public void setCurrentField(AbstractField field) {
         this.currentField.people.remove(this);
+        this.currentField = field;
+        if(currentField.getBuilding() == Igloo){
+            currentState = InIgloo;
+        }else {
+            currentState = Normal;
+        }
+
     }
 
     public void setIsland(IceIsland island) {
@@ -101,6 +116,10 @@ public abstract class Player implements IActor {
     public void worked() {
     }
 
+
+    @Override
     public void update() {
+        this.workPoints = maxWorkPoints;
     }
+
 }

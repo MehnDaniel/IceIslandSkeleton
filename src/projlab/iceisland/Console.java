@@ -1,14 +1,25 @@
 package projlab.iceisland;
 
 
+import projlab.iceisland.model.AbstractField;
+import projlab.iceisland.model.IceIsland;
+import projlab.iceisland.model.Player;
+import projlab.iceisland.model.Thing;
+import projlab.iceisland.model.fields.StableField;
+import projlab.iceisland.model.fields.UnstableField;
+import projlab.iceisland.model.players.Eskimo;
+import projlab.iceisland.model.players.PolarExplorer;
+
+import java.util.List;
+
 public class Console {
 
     public void testCases()
     {
         //a tesztesetek listázása
-        System.out.println("Tesztesetek:\n
-        1. Új játék\n
-        2. Kilépés a játékból\n
+        System.out.println("Tesztesetek:\n" +
+        "1. Új játék\n" +
+        "2. Kilépés a játékból\n" +
         3. Kör befejezése\n
         4. Másik mezőre lépés\n
         a. A mező szomszédos?\n
@@ -40,21 +51,14 @@ public class Console {
         //input
         Scanner in = new Scanner(System.in);
         //input beolvasása
-        int case = in.nextInt();
+        int i = in.nextInt();
 
         //teszteset számának kiírása
-        System.out.println("Teszteset: " + case);
+        System.out.println("Teszteset: " + i);
 
-        //a tesztesetekhez szükséges objektumok létrehozása
-        Builder builder = new Builder();
-        Eskimo eskimo = new Eskimo();
-        PolarExplorer explorer = new PolarExplorer();
-        AbstractField absField = new AbstractField();
-        RopeRescue strategy = new RopeRescue();
-        IceIsland iceisland = new IceIsland();
 
         //a tesztesetek
-        switch(case)
+        switch(i)
         {
             case 1:
                 //új játék indítása
@@ -76,12 +80,41 @@ public class Console {
                 //az eszkimó iglut épít
                 eskimo.buildIgloo();
                 break;
+
+                //Példa implementáció:
             case 6:
+                //nem feltétlenül ez lesz a konstruktorhívás kinézete de lényeg hogy nem kell bele semmilyen tárgy
+                PolarExplorer explorer = new PolarExplorer();
+
+                //Megjegyzem: kelleni fog az abstractfieldnek egy addNeighbour függvény,
+                // mert így elég nehéz lesz gráfot építeni i guess.
+
+                AbstractField unstable = new UnstableField(Thing.Nothing, 4, 2, List.of(),"unstable1");
+                AbstractField stable = new StableField(Thing.Nothing, 8, List.of(unstable), "stable1");
+
+
+                List<AbstractField> fields = List.of(
+                        stable,
+                        unstable
+                );
+
+                IceIsland island = new IceIsland.Builder()
+                        .players(List.of(explorer))
+                        .generator(new SkeletonIslandGenerator(fields))
+                        .createIceIsland();
+
                 //a sarkkutató csekkolja a szomszédos mezőt
-                explorer.checkField(absField);
+                explorer.checkField(0);
                 break;
             case 7:
                 //a játékos havat takarít
+                if(j == 1){
+                    Player eskimo = new Eskimo(Thing.Shovel);
+
+
+                }else{
+
+                }
                 eskimo.dig();
                 break;
             case 8:
