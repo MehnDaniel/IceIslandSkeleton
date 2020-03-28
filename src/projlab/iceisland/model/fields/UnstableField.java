@@ -1,17 +1,24 @@
 package projlab.iceisland.model.fields;
 
+
 import projlab.iceisland.model.AbstractField;
+import model.*;
+
+import static model.AbstractField.FieldState.NoSnow;
+import static model.AbstractField.FieldState.Water;
+import static model.Building.NoBuilding;
+import static model.Interaction.Underwater;
 
 public class UnstableField extends AbstractField {
     private int capacity;
 
-    public UnstableField(Thing buriedThing, int snow, int capacity) {
-        super(buriedThing, snow);
+    public UnstableField(Thing buriedThing, int snow, int capacity, string name) {
+        super(buriedThing, snow,name);
         this.capacity = capacity;
     }
 
     UnstableField(){
-        this(Thing.Nothing, 5, 3);
+        this(Thing.Nothing, 5, 3,"");
     }
 
     @Override

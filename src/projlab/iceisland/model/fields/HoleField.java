@@ -1,14 +1,21 @@
 package projlab.iceisland.model.fields;
 
 import projlab.iceisland.model.AbstractField;
+import model.AbstractField;
+import model.Interaction;
+import model.Player;
+import model.Thing;
+
+import static model.AbstractField.FieldState.Water;
+import static model.Interaction.Underwater;
 
 public class HoleField extends AbstractField {
-    public HoleField(int snow){
-        super(Thing.Nothing, snow);
+    public HoleField(int snow,string name){
+        super(Thing.Nothing, snow,name);
     }
 
     public HoleField() {
-        super(Thing.Nothing, 2);
+        super(Thing.Nothing, 2,"");
     }
 
     @Override

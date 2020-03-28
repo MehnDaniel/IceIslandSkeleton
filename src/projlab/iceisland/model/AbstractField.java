@@ -1,4 +1,9 @@
 package projlab.iceisland.model;
+import java.util.*;
+
+import static model.AbstractField.FieldState.*;
+import static model.Building.NoBuilding;
+import model.Thing;
 
 public abstract class AbstractField {
     protected int snow;
@@ -8,7 +13,8 @@ public abstract class AbstractField {
     protected Building building;
     protected boolean hasStorm;
     protected ArrayList<AbstractField> neighbors;
- //?? nem tudom hogy kell e nekem logikusan kell de az oszt diagrammon nincs rajta
+    private name;
+
     public AbstractField getNeighbor(int n){
         if(n >= neighbors.size())
             return null;
@@ -28,14 +34,15 @@ public abstract class AbstractField {
     //Konstruktorok kimaradtak innen
     public abstract int getCapacity();
 
-    public AbstractField(int startingSnow, List<Player> players, Thing buriedThing, Building building) {
+    public AbstractField(int startingSnow, List<Player> players, Thing buriedThing, Building building,String name) {
         this.snow = startingSnow;
         people = players;
         this.buriedThing = buriedThing;
         this.building = building;
+        this.name=name;
     }
-    public AbstractField(Thing buriedThing, int startingSnow) {
-        this(startingSnow, new ArrayList<>(), buriedThing, NoBuilding);
+    public AbstractField(Thing buriedThing, int startingSnow,String name) {
+        this(startingSnow, new ArrayList<>(), buriedThing, NoBuilding,name);
     }
 
     public void step(Player player){
