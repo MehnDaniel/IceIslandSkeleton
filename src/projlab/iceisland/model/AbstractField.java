@@ -1,4 +1,9 @@
 package projlab.iceisland.model;
+import java.util.*;
+
+import static model.AbstractField.FieldState.*;
+import static model.Building.NoBuilding;
+import model.Thing;
 
 public abstract class AbstractField {
     protected int snow;
@@ -8,12 +13,16 @@ public abstract class AbstractField {
     protected Building building;
     protected boolean hasStorm;
     protected ArrayList<AbstractField> neighbors;
- //?? nem tudom hogy kell e nekem logikusan kell de az oszt diagrammon nincs rajta
+    private name;
+
     public AbstractField getNeighbor(int n){
         if(n >= neighbors.size())
             return null;
 
         return neighbors.get(n);
+    }
+    public  string getName(){
+        return  this.name;
     }
 
     public void stepTo(Player player, AbstractField field){
@@ -28,6 +37,17 @@ public abstract class AbstractField {
     //Konstruktorok kimaradtak innen
     public abstract int getCapacity();
 
+    public AbstractField(int startingSnow, List<Player> players, Thing buriedThing, Building building,String name) {
+        this.snow = startingSnow;
+        people = players;
+        this.buriedThing = buriedThing;
+        this.building = building;
+        this.name=name;
+    }
+    public AbstractField(Thing buriedThing, int startingSnow,String name) {
+        this(startingSnow, new ArrayList<>(), buriedThing, NoBuilding,name);
+    }
+
     public void step(Player player){
         people.add(player);
         player.setCurrentField(this);
@@ -35,10 +55,10 @@ public abstract class AbstractField {
 
     public void dig(int n){
         if (currentState == UnderSnow) {
-
+            snow -= n;
         }
         if(snow <= 0){
-
+            snow = 0;
         }
     }
 
@@ -60,6 +80,7 @@ public abstract class AbstractField {
         }
         if (this.buriedThing != Thing.Nothing) {
             player.setThing(buriedThing);
+            this.buriedThing = Thing.Nothing;
         }
     }
 
@@ -80,7 +101,7 @@ public abstract class AbstractField {
     }
 
     protected void setStorm(boolean bool){
-
+        this.buriedThing = Thing.Nothing;
     }
 
     public boolean build(Building building){
@@ -92,20 +113,15 @@ public abstract class AbstractField {
     }
 
     public void snowing(){
-
-
+        snow++;
+        currentState = UnderSnow;
     }
 
     public void update(){
         if (hasStorm) {
             snowing();
             Cold.interact(player);
-            if(r < 0.25){ setStorm(false);
-            }
-        }else{
-            if(r < 0.6){
-                setStorm(true);
-            }
+        }
         }
     }
 }
