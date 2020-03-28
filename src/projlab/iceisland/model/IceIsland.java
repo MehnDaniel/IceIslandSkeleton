@@ -102,14 +102,8 @@ public class IceIsland {
 
 
 
-    @Override
-    public void nextRound() {
-        output.draw(this);
-        actionInput.act(player, input, output);
-        updateAll();
-    }
 
-    private void updateAll() {
+    public void updateAll() {
             field.update();
             player.update();
             if(player.isDead()){

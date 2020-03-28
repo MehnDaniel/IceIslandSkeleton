@@ -1,5 +1,12 @@
 package projlab.iceisland.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static projlab.iceisland.model.AbstractField.FieldState.*;
+import static projlab.iceisland.model.AbstractField.FieldState.UnderSnow;
+import static projlab.iceisland.model.Building.NoBuilding;
+
 public abstract class AbstractField {
     protected int snow;
     protected List<Player> people;
@@ -8,7 +15,8 @@ public abstract class AbstractField {
     protected Building building;
     protected boolean hasStorm;
     protected ArrayList<AbstractField> neighbors;
- //?? nem tudom hogy kell e nekem logikusan kell de az oszt diagrammon nincs rajta
+
+    //?? nem tudom hogy kell e nekem logikusan kell de az oszt diagrammon nincs rajta
     public AbstractField getNeighbor(int n){
         if(n >= neighbors.size())
             return null;
@@ -35,10 +43,12 @@ public abstract class AbstractField {
 
     public void dig(int n){
         if (currentState == UnderSnow) {
-
+            snow -= n;
         }
+        building = NoBuilding;
         if(snow <= 0){
-
+            currentState = NoSnow;
+            snow = 0;
         }
     }
 
@@ -48,6 +58,7 @@ public abstract class AbstractField {
 
     public Player rescueSomeone(){
         if(currentState == Water && !people.isEmpty()){
+            Player player = people.get(0);
             people.remove(player);
             return player;
         }

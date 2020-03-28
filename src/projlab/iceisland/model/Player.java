@@ -26,4 +26,14 @@ public abstract class Player implements IActor {
     public void skipTurn(){}
 
     public void takeThing(){}
+
+    public void worked() {
+    }
+
+    public void setCurrentField(AbstractField abstractField) {
+    }
+
+    public void setThing(Thing buriedThing) {
+
+    }
 }
