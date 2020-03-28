@@ -21,6 +21,9 @@ public abstract class AbstractField {
 
         return neighbors.get(n);
     }
+    public  string getName(){
+        return  this.name;
+    }
 
     public void stepTo(Player player, AbstractField field){
         field.step(player);
