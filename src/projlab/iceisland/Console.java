@@ -17,6 +17,7 @@ public class Console {
     public void testCases()
     {
         //a tesztesetek listázása
+
         System.out.println("Tesztesetek:\n" +
         "1. Új játék\n" +
         "2. Kilépés a játékból\n" +
@@ -51,6 +52,23 @@ public class Console {
         //input
         Scanner in = new Scanner(System.in);
         //input beolvasása
+
+        int case = in.nextInt();
+
+        //teszteset számának kiírása
+        System.out.println("Teszteset: " + case);
+
+        //a tesztesetekhez szükséges objektumok létrehozása
+        Builder builder = new Builder();
+        Eskimo eskimo = new Eskimo();
+        PolarExplorer explorer = new PolarExplorer();
+        AbstractField absField = new AbstractField();
+        RopeRescue strategy = new RopeRescue();
+        IceIsland iceisland = new IceIsland();
+
+        //a tesztesetek
+        switch(case)
+
         int i = in.nextInt();
 
         //teszteset számának kiírása
@@ -59,6 +77,7 @@ public class Console {
 
         //a tesztesetek
         switch(i)
+
         {
             case 1:
                 //új játék indítása
@@ -80,6 +99,14 @@ public class Console {
                 //az eszkimó iglut épít
                 eskimo.buildIgloo();
                 break;
+
+            case 6:
+                //a sarkkutató csekkolja a szomszédos mezőt
+                explorer.checkField(absField);
+                break;
+            case 7:
+                //a játékos havat takarít
+
 
                 //Példa implementáció:
             case 6:
@@ -115,6 +142,7 @@ public class Console {
                 }else{
 
                 }
+
                 eskimo.dig();
                 break;
             case 8:
