@@ -1,6 +1,13 @@
 package projlab.iceisland.model;
 
+
 public abstract class Player implements IActor {
+
+import static projlab.iceisland.model.Building.Igloo;
+import static projlab.iceisland.model.Player.PlayerState.*;
+
+public abstract class Player implements IUpdatable, IActor {
+
 
     protected int bodyHeat;
     protected int maxBodyHeat;
@@ -10,6 +17,7 @@ public abstract class Player implements IActor {
     protected AbstractField currentField;
     protected IceIsland island;
     protected PlayerState currentState = Normal;
+
 //(this,getname),  szekvenciák alapján
     //enumoknál kevesebb paraméter
 public Player(int bodyHeat,
@@ -30,9 +38,10 @@ public Player(int bodyHeat,
         this(maxBodyHeat, maxBodyHeat, maxWorkPoints, maxWorkPoints, startingItem);
     }
 
+
     public void ate() {
-    thing=Thing.Nothing;
-        called(this, this.getName(), "ate", "");
+       called(this, this.getName(), "ate", "");
+        thing=Thing.Nothing;
     }
 
     public void buildingBuilt(Building building) {
@@ -41,10 +50,12 @@ public Player(int bodyHeat,
         called(this, this.getName(), "buildingBuilt", "Igloo");
     }
 
+
     public void step(int n) {
+          called(this, this.getName(), "step", "1");
+
         currentField.stepTo(this, currentField.getNeighbor(n));
 
-        called(this, this.getName(), "step", "1");
     }
 
     public void dig() {
@@ -53,11 +64,19 @@ public Player(int bodyHeat,
         called(this, this.getName(), "dig", "");
     }
 
-    public void rescueOtherPlayer(int n) {
-        thing.getRescueStrategy().rescuePlayer(this, n);
 
-        called(this, this.getName(), "rescueOtherPlayer", "1");
+
+    public enum PlayerState{
+        Normal, InIgloo, InWater
     }
+
+
+    public void rescueOtherPlayer(int n) {
+              called(this, this.getName(), "rescueOtherPlayer", "1");
+      thing.getRescueStrategy().rescuePlayer(this, n);
+     
+    }
+
 
     public void eat() {
         thing.useForEating(this);
@@ -100,6 +119,7 @@ public Player(int bodyHeat,
         return true;
     }
 
+
     public boolean canWork() {
         called(this, this.getName(), "canWork", "");
         return true;
@@ -130,12 +150,6 @@ public Player(int bodyHeat,
     this.thing=thing;
     }
 
-    public void setCurrentField(AbstractField field) {
-        this.currentField.people.remove(this);
-        this.currentField = field;
-
-        called(this, this.getName(), "setCurrentField", "field");
-    }
 
     public void setIsland(IceIsland island) {
         this.island = island;
@@ -157,8 +171,25 @@ public Player(int bodyHeat,
         called(this, this.getName(), "worked", "");
     }
 
-    public void update() {
-        this.workPoints = maxWorkPoints;
-        called(this, this.getName(), "update", "");
+    public void setCurrentField(AbstractField field) {
+              called(this, this.getName(), "setCurrentField", "field");
+        this.currentField.people.remove(this);
+        this.currentField = field;
+        if(currentField.getBuilding() == Igloo){
+            currentState = InIgloo;
+        }else {
+            currentState = Normal;
+        }
+
     }
+
+
+
+    @Override
+    public void update() {
+              called(this, this.getName(), "update", "");
+
+        this.workPoints = maxWorkPoints;
+    }
+
 }

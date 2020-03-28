@@ -1,15 +1,14 @@
 package projlab.iceisland.model.fields;
 
 import projlab.iceisland.model.AbstractField;
-import model.AbstractField;
-import model.Thing;
+
+import projlab.iceisland.model.Thing;
+
+import java.util.List;
 
 public class StableField extends AbstractField {
-    public StableField(Thing buriedThing,int snow,string name){
-        super(buriedThing, snow,name);
-    }
-    public StableField(Thing buriedThing) {
-        super(buriedThing, 8,"");
+    public StableField(Thing buriedThing, int snow, List<AbstractField> neighbors, String name){
+        super(buriedThing, snow, neighbors,name);
     }
 
     public int getCapacity() {
