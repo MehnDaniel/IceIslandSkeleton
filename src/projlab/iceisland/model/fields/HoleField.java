@@ -3,6 +3,14 @@ package projlab.iceisland.model.fields;
 import projlab.iceisland.model.AbstractField;
 
 public class HoleField extends AbstractField {
+    public HoleField(int snow){
+        super(Thing.Nothing, snow);
+    }
+
+    public HoleField() {
+        super(Thing.Nothing, 2);
+    }
+
     @Override
     public void step(Player player) {
         super.step(player);
@@ -22,6 +30,8 @@ public class HoleField extends AbstractField {
     @Override
     public void update() {
         super.update();
-        Underwater.interact(player);
+        for (Player player : people) {
+            Underwater.interact(player);
+        }
     }
 }

@@ -28,6 +28,16 @@ public abstract class AbstractField {
     //Konstruktorok kimaradtak innen
     public abstract int getCapacity();
 
+    public AbstractField(int startingSnow, List<Player> players, Thing buriedThing, Building building) {
+        this.snow = startingSnow;
+        people = players;
+        this.buriedThing = buriedThing;
+        this.building = building;
+    }
+    public AbstractField(Thing buriedThing, int startingSnow) {
+        this(startingSnow, new ArrayList<>(), buriedThing, NoBuilding);
+    }
+
     public void step(Player player){
         people.add(player);
         player.setCurrentField(this);
@@ -35,10 +45,10 @@ public abstract class AbstractField {
 
     public void dig(int n){
         if (currentState == UnderSnow) {
-
+            snow -= n;
         }
         if(snow <= 0){
-
+            snow = 0;
         }
     }
 
@@ -60,6 +70,7 @@ public abstract class AbstractField {
         }
         if (this.buriedThing != Thing.Nothing) {
             player.setThing(buriedThing);
+            this.buriedThing = Thing.Nothing;
         }
     }
 
@@ -80,7 +91,7 @@ public abstract class AbstractField {
     }
 
     protected void setStorm(boolean bool){
-
+        this.buriedThing = Thing.Nothing;
     }
 
     public boolean build(Building building){
@@ -92,20 +103,15 @@ public abstract class AbstractField {
     }
 
     public void snowing(){
-
-
+        snow++;
+        currentState = UnderSnow;
     }
 
     public void update(){
         if (hasStorm) {
             snowing();
             Cold.interact(player);
-            if(r < 0.25){ setStorm(false);
-            }
-        }else{
-            if(r < 0.6){
-                setStorm(true);
-            }
+        }
         }
     }
 }
