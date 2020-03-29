@@ -2,24 +2,24 @@ package projlab.iceisland.model.fields;
 
 
 import projlab.iceisland.model.AbstractField;
-import model.*;
+import projlab.iceisland.model.Player;
+import projlab.iceisland.model.Thing;
 
-import static model.AbstractField.FieldState.NoSnow;
-import static model.AbstractField.FieldState.Water;
-import static model.Building.NoBuilding;
-import static model.Interaction.Underwater;
+import java.util.List;
+
+import static projlab.iceisland.model.AbstractField.FieldState.NoSnow;
+import static projlab.iceisland.model.AbstractField.FieldState.Water;
+import static projlab.iceisland.model.Building.NoBuilding;
+import static projlab.iceisland.model.Interaction.Underwater;
 
 public class UnstableField extends AbstractField {
     private int capacity;
 
-    public UnstableField(Thing buriedThing, int snow, int capacity, string name) {
-        super(buriedThing, snow,name);
+    public UnstableField(Thing buriedThing, int snow, int capacity, List<AbstractField> neighbors, String name) {
+        super(buriedThing, snow, neighbors, name);
         this.capacity = capacity;
     }
 
-    UnstableField(){
-        this(Thing.Nothing, 5, 3,"");
-    }
 
     @Override
     public void step(Player player) {
@@ -40,9 +40,12 @@ public class UnstableField extends AbstractField {
     @Override
     public Player rescueSomeone() {
         Player player = super.rescueSomeone();
-        if(people.size() == 0 && player != null){
+        if (people.size() == 0 && player != null) {
             currentState = NoSnow;
         }
+
+    //HIÁNYOS?
+    }
 
     @Override
     public int getCapacity() {
