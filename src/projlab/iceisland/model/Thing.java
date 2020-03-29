@@ -1,5 +1,6 @@
 package projlab.iceisland.model;
 
+import projlab.iceisland.Skeleton;
 import projlab.iceisland.model.thingusagestrategies.BarehandsDig;
 import projlab.iceisland.model.thingusagestrategies.RopeRescue;
 import projlab.iceisland.model.thingusagestrategies.ShovelDig;
@@ -9,25 +10,32 @@ public enum Thing {
     Nothing{
         @Override
         DiggingStrategy getDiggingStrategy() {
+            Skeleton.called(this, "Nothing", "getDiggingStrategy", "");
             return new BarehandsDig();
         }
 
         @Override
         RescueStrategy getRescueStrategy() {
+            Skeleton.called(this, "Nothing", "getRescueStrategy", "");
+
             return cantRescue;
         }
 
         @Override
         boolean useForSwimming() {
+            Skeleton.called(this, "Nothing", "useForSwimming", "");
+
             return false;
         }
         @Override
         public void useForEating(Player who){
+            Skeleton.called(this, "Nothing", "useForEating", "who");
 
         }
 
         @Override
         void useForShooting(AbstractField from, IceIsland island) {
+            Skeleton.called(this, "Nothing", "useForShooting", "from, island");
 
         }
 
@@ -35,127 +43,152 @@ public enum Thing {
     Food{
         @Override
         DiggingStrategy getDiggingStrategy() {
+            Skeleton.called(this, "Food", "getDiggingStrategy", "");
             return new BarehandsDig();
         }
 
         @Override
         RescueStrategy getRescueStrategy() {
+            Skeleton.called(this, "Food", "getRescueStrategy", "");
             return cantRescue;
         }
 
         @Override
         boolean useForSwimming() {
+            Skeleton.called(this, "Food", "useForSwimming", "");
             return false;
         }
 
         @Override
         public void useForEating(Player who){
+            Skeleton.called(this, "Food", "useForEating", "who");
             who.ate();
         }
 
         @Override
         void useForShooting(AbstractField from, IceIsland island) {
+            Skeleton.called(this, "Food", "useForShooting", "from, island");
 
         }
     }, Shovel{
         @Override
         DiggingStrategy getDiggingStrategy() {
+            Skeleton.called(this, "Shovel", "getDiggingStrategy", "");
             return new ShovelDig();
         }
 
         @Override
         RescueStrategy getRescueStrategy() {
+            Skeleton.called(this, "Shovel", "getRescueStrategy", "");
             return cantRescue;
         }
 
         @Override
         boolean useForSwimming() {
+            Skeleton.called(this, "Shovel", "useForSwimming", "");
             return false;
         }
 
         @Override
         public void useForEating(Player who){
+            Skeleton.called(this, "Shovel", "useForEating", "who");
 
         }
 
         @Override
         void useForShooting(AbstractField from, IceIsland island) {
+            Skeleton.called(this, "Shovel", "useForShooting", "from, island");
 
         }
     }, Scuba{
         @Override
         DiggingStrategy getDiggingStrategy() {
+            Skeleton.called(this, "Scuba", "getDiggingStrategy", "");
             return new BarehandsDig();
         }
 
         @Override
         RescueStrategy getRescueStrategy() {
+            Skeleton.called(this, "Scuba", "getRescueStrategy", "");
             return cantRescue;
         }
 
         @Override
         boolean useForSwimming() {
+            Skeleton.called(this, "Scuba", "useForSwimming", "");
             return true;
         }
 
         @Override
         public void useForEating(Player who){
+            Skeleton.called(this, "Scuba", "useForEating", "who");
 
         }
 
 
         @Override
         void useForShooting(AbstractField from, IceIsland island) {
+            Skeleton.called(this, "Scuba", "useForShooting", "from, island");
 
         }
     }, Rope{
         @Override
         DiggingStrategy getDiggingStrategy() {
+            Skeleton.called(this, "Rope", "getDiggingStrategy", "");
             return new BarehandsDig();
         }
 
         @Override
         RescueStrategy getRescueStrategy() {
+            Skeleton.called(this, "Rope", "getRescueStrategy", "");
             return new RopeRescue();
         }
 
         @Override
         boolean useForSwimming() {
+            Skeleton.called(this, "Rope", "useForSwimming", "");
             return false;
         }
 
         @Override
         public void useForEating(Player who){
+            Skeleton.called(this, "Rope", "useForEating", "who");
 
         }
 
         @Override
         void useForShooting(AbstractField from, IceIsland island) {
+            Skeleton.called(this, "Rope", "useForShooting", "from, island");
 
         }
     }, FlareGun{
         @Override
         DiggingStrategy getDiggingStrategy() {
+            Skeleton.called(this, "FlareGun", "getDiggingStrategy", "");
             return new BarehandsDig();
         }
 
         @Override
         RescueStrategy getRescueStrategy() {
+            Skeleton.called(this, "FlareGun", "getRescueStrategy", "");
             return cantRescue;
         }
 
         @Override
         boolean useForSwimming() {
+            Skeleton.called(this, "FlareGun", "useForSwimming", "");
             return false;
         }
 
         @Override
         public void useForEating(Player who){
+            Skeleton.called(this, "FlareGun", "useForEating", "who");
 
         }
 
         @Override
         void useForShooting(AbstractField from, IceIsland island) {
+            Skeleton.called(this, "FlareGun", "useForShooting", "from, island");
             if(island.isAssembleFlareGunPossible(from)){
                 island.win();
             }
@@ -165,26 +198,31 @@ public enum Thing {
     }, Cartridge{
         @Override
         DiggingStrategy getDiggingStrategy() {
+            Skeleton.called(this, "Cartridge", "getDiggingStrategy", "");
             return new BarehandsDig();
         }
 
         @Override
         RescueStrategy getRescueStrategy() {
+            Skeleton.called(this, "Cartridge", "getRescueStrategy", "");
             return cantRescue;
         }
 
         @Override
         boolean useForSwimming() {
+            Skeleton.called(this, "Cartridge", "useForSwimming", "");
             return false;
         }
 
         @Override
         void useForEating(Player who) {
+            Skeleton.called(this, "Cartridge", "useForEating", "who");
 
         }
 
         @Override
         void useForShooting(AbstractField from, IceIsland island) {
+            Skeleton.called(this, "Cartridge", "useForShooting", "from, island");
             if(island.isAssembleFlareGunPossible(from)){
                 island.win();
             }
@@ -193,26 +231,31 @@ public enum Thing {
     }, Beacon{
         @Override
         DiggingStrategy getDiggingStrategy() {
+            Skeleton.called(this, "Beacon", "getDiggingStrategy", "");
             return new BarehandsDig();
         }
 
         @Override
         RescueStrategy getRescueStrategy() {
+            Skeleton.called(this, "Beacon", "getRescueStrategy", "");
             return cantRescue;
         }
 
         @Override
         boolean useForSwimming() {
+            Skeleton.called(this, "Beacon", "useForSwimming", "");
             return false;
         }
 
         @Override
         public void useForEating(Player who){
+            Skeleton.called(this, "Beacon", "useForEating", "who");
 
         }
 
         @Override
         void useForShooting(AbstractField from, IceIsland island) {
+            Skeleton.called(this, "Beacon", "useForShooting", "from, island");
             if(island.isAssembleFlareGunPossible(from)){
                 island.win();
             }
