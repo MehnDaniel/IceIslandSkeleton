@@ -13,7 +13,7 @@ public abstract class Player implements IActor {
     protected int maxWorkPoints;
     protected AbstractField currentField;
     protected IceIsland island;
-    protected PlayerState currentState = Normal;
+    protected PlayerState currentState = PlayerState.Normal;
 //(this,getname),  szekvenciák alapján
     //enumoknál kevesebb paraméter
 public Player(int bodyHeat,
@@ -38,19 +38,24 @@ public Player(int bodyHeat,
         Skeleton.called(this, this.getName(), "ate", "");
 
         thing=Thing.Nothing;
+
+        Skeleton.returned(this, this.getName(), "ate", "");
     }
 
     public void buildingBuilt(Building building) {
         Skeleton.called(this, this.getName(), "buildingBuilt", "Igloo");
 
-        currentState = InIgloo;
+        currentState = PlayerState.InIgloo;
 
+        Skeleton.returned(this, this.getName(), "buildingBuilt", "Igloo");
     }
 
     public void step(int n) {
         Skeleton.called(this, this.getName(), "step", "1");
 
         currentField.stepTo(this, currentField.getNeighbor(n));
+
+        Skeleton.returned(this, this.getName(), "step", "1");
 
 
     }
@@ -60,6 +65,7 @@ public Player(int bodyHeat,
 
         thing.getDiggingStrategy().dig(this);
 
+        Skeleton.returned(this, this.getName(), "dig", "");
 
     }
 
@@ -67,6 +73,8 @@ public Player(int bodyHeat,
         Skeleton.called(this, this.getName(), "rescueOtherPlayer", "1");
 
         thing.getRescueStrategy().rescuePlayer(this, n);
+
+        Skeleton.returned(this, this.getName(), "rescueOtherPlayer", "1");
 
 
     }
@@ -76,15 +84,20 @@ public Player(int bodyHeat,
 
         thing.useForEating(this);
 
+        Skeleton.returned(this, this.getName(), "eat", "");
 
     }
 
     public void buildIgloo() {
         Skeleton.called(this, this.getName(), "buildIgloo", "");
+
+        Skeleton.returned(this, this.getName(), "buildIgloo", "");
+
     }
 
     public int checkField(int n) {
         Skeleton.called(this, this.getName(), "checkField", "1");
+        Skeleton.returned(this, this.getName(), "checkField", "1");
         return -1;
     }
 
@@ -93,11 +106,16 @@ public Player(int bodyHeat,
 
         thing.useForShooting(currentField, island);
 
+        Skeleton.returned(this, this.getName(), "assembleFlareGun", "");
+
+
 
     }
 
     public void skipTurn() {
         Skeleton.called(this, this.getName(), "skipTurn", "");
+        Skeleton.returned(this, this.getName(), "skipTurn", "");
+
     }
 
     public void takeThing() {
@@ -105,47 +123,68 @@ public Player(int bodyHeat,
 
         currentField.takeThing(this);
 
+        Skeleton.returned(this, this.getName(), "takeThing", "");
+
+
     }
 
 
     public boolean isDead() {
         Skeleton.called(this, this.getName(), "isDead", "");
-    return true;
+        Skeleton.returned(this, this.getName(), "isDead", "");
+
+        return true;
     }
 
     public boolean isWarm() {
         Skeleton.called(this, this.getName(), "isWarm", "");
+        Skeleton.returned(this, this.getName(), "isWarm", "");
+
         return true;
     }
 
     public boolean canWork() {
         Skeleton.called(this, this.getName(), "canWork", "");
+        Skeleton.returned(this, this.getName(), "canWork", "");
+
         return true;
     }
 
     public int getBodyHeat() {
         Skeleton.called(this, this.getName(), "getBodyHeat", "");
+        Skeleton.returned(this, this.getName(), "getBodyHeat", "");
+
         return bodyHeat;
     }
 
     public int getWorkPoints() {
         Skeleton.called(this, this.getName(), "getWorkPoints", "");
+        Skeleton.returned(this, this.getName(), "getWorkPoints", "");
+
         return workPoints;
     }
 
     public AbstractField getCurrentField() {
         Skeleton.called(this, this.getName(), "getCurrentField", "");
+        Skeleton.returned(this, this.getName(), "getCurrentField", "");
+
         return currentField;
     }
 
     public Thing getThing() {
         Skeleton.called(this, this.getName(), "getThing", "");
+        Skeleton.returned(this, this.getName(), "getThing", "");
+
         return thing;
     }
 
     public void setThing(Thing thing) {
         Skeleton.called(this, this.getName(), "setThing", "");
-    this.thing=thing;
+
+        this.thing=thing;
+
+        Skeleton.returned(this, this.getName(), "setThing", "");
+
     }
 
     public void setCurrentField(AbstractField field) {
@@ -154,6 +193,7 @@ public Player(int bodyHeat,
         this.currentField.people.remove(this);
         this.currentField = field;
 
+        Skeleton.returned(this, this.getName(), "setCurrentField", "field");
 
 }
 
@@ -162,11 +202,14 @@ public Player(int bodyHeat,
 
         this.island = island;
 
+        Skeleton.returned(this, this.getName(), "setIsland", "island");
+
     }
 
     public void setWorkPoints(int i) {
         Skeleton.called(this, this.getName(), "setWorkPoints", "2");
         workPoints = i;
+        Skeleton.returned(this, this.getName(), "setWorkPoints", "2");
 
     }
 
@@ -175,12 +218,16 @@ public Player(int bodyHeat,
 
         bodyHeat--;
 
+        Skeleton.returned(this, this.getName(), "damage", "");
+
     }
 
     public void worked() {
         Skeleton.called(this, this.getName(), "worked", "");
 
         workPoints--;
+
+        Skeleton.returned(this, this.getName(), "worked", "");
 
     }
 
@@ -189,5 +236,12 @@ public Player(int bodyHeat,
 
         this.workPoints = maxWorkPoints;
 
+        Skeleton.returned(this, this.getName(), "update", "");
+
     }
+
+    public enum PlayerState{
+        Normal, InIgloo, InWater
+    }
+
 }

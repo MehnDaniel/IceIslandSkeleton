@@ -1,6 +1,7 @@
 package projlab.iceisland.model.players;
 
 import projlab.iceisland.model.Player;
+import projlab.iceisland.model.Thing;
 
 public class PolarExplorer extends Player {
 
