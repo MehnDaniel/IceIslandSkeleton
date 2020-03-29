@@ -1,5 +1,9 @@
 package projlab.iceisland.model;
 
+import com.sun.media.jfxmedia.events.PlayerStateEvent;
+import projlab.iceisland.Skeleton;
+
+
 public abstract class Player implements IActor {
 
     protected int bodyHeat;
@@ -31,134 +35,159 @@ public Player(int bodyHeat,
     }
 
     public void ate() {
-    thing=Thing.Nothing;
-        called(this, this.getName(), "ate", "");
+        Skeleton.called(this, this.getName(), "ate", "");
+
+        thing=Thing.Nothing;
     }
 
     public void buildingBuilt(Building building) {
+        Skeleton.called(this, this.getName(), "buildingBuilt", "Igloo");
+
         currentState = InIgloo;
 
-        called(this, this.getName(), "buildingBuilt", "Igloo");
     }
 
     public void step(int n) {
+        Skeleton.called(this, this.getName(), "step", "1");
+
         currentField.stepTo(this, currentField.getNeighbor(n));
 
-        called(this, this.getName(), "step", "1");
+
     }
 
     public void dig() {
+        Skeleton.called(this, this.getName(), "dig", "");
+
         thing.getDiggingStrategy().dig(this);
 
-        called(this, this.getName(), "dig", "");
+
     }
 
     public void rescueOtherPlayer(int n) {
+        Skeleton.called(this, this.getName(), "rescueOtherPlayer", "1");
+
         thing.getRescueStrategy().rescuePlayer(this, n);
 
-        called(this, this.getName(), "rescueOtherPlayer", "1");
+
     }
 
     public void eat() {
+        Skeleton.called(this, this.getName(), "eat", "");
+
         thing.useForEating(this);
 
-        called(this, this.getName(), "eat", "");
+
     }
 
     public void buildIgloo() {
-        called(this, this.getName(), "buildIgloo", "");
+        Skeleton.called(this, this.getName(), "buildIgloo", "");
     }
 
     public int checkField(int n) {
-        called(this, this.getName(), "checkField", "1");
+        Skeleton.called(this, this.getName(), "checkField", "1");
         return -1;
     }
 
     public void assembleFlareGun() {
+        Skeleton.called(this, this.getName(), "assembleFlareGun", "");
+
         thing.useForShooting(currentField, island);
 
-        called(this, this.getName(), "assembleFlareGun", "");
+
     }
 
     public void skipTurn() {
-        called(this, this.getName(), "skipTurn", "");
+        Skeleton.called(this, this.getName(), "skipTurn", "");
     }
 
     public void takeThing() {
+        Skeleton.called(this, this.getName(), "takeThing", "");
+
         currentField.takeThing(this);
-        called(this, this.getName(), "takeThing", "");
+
     }
 
 
     public boolean isDead() {
-        called(this, this.getName(), "isDead", "");
+        Skeleton.called(this, this.getName(), "isDead", "");
     return true;
     }
 
     public boolean isWarm() {
-        called(this, this.getName(), "isWarm", "");
+        Skeleton.called(this, this.getName(), "isWarm", "");
         return true;
     }
 
     public boolean canWork() {
-        called(this, this.getName(), "canWork", "");
+        Skeleton.called(this, this.getName(), "canWork", "");
         return true;
     }
 
     public int getBodyHeat() {
-        called(this, this.getName(), "getBodyHeat", "");
+        Skeleton.called(this, this.getName(), "getBodyHeat", "");
         return bodyHeat;
     }
 
     public int getWorkPoints() {
-        called(this, this.getName(), "getWorkPoints", "");
+        Skeleton.called(this, this.getName(), "getWorkPoints", "");
         return workPoints;
     }
 
     public AbstractField getCurrentField() {
-        called(this, this.getName(), "getCurrentField", "");
+        Skeleton.called(this, this.getName(), "getCurrentField", "");
         return currentField;
     }
 
     public Thing getThing() {
-        called(this, this.getName(), "getThing", "");
+        Skeleton.called(this, this.getName(), "getThing", "");
         return thing;
     }
 
     public void setThing(Thing thing) {
-        called(this, this.getName(), "setThing", "");
+        Skeleton.called(this, this.getName(), "setThing", "");
     this.thing=thing;
     }
 
     public void setCurrentField(AbstractField field) {
+        Skeleton.called(this, this.getName(), "setCurrentField", "field");
+
         this.currentField.people.remove(this);
         this.currentField = field;
 
-        called(this, this.getName(), "setCurrentField", "field");
-    }
+
+}
 
     public void setIsland(IceIsland island) {
+        Skeleton.called(this, this.getName(), "setIsland", "island");
+
         this.island = island;
-        called(this, this.getName(), "setIsland", "island");
+
     }
 
     public void setWorkPoints(int i) {
+        Skeleton.called(this, this.getName(), "setWorkPoints", "2");
         workPoints = i;
-        called(this, this.getName(), "setWorkPoints", "2");
+
     }
 
     public void damage() {
+        Skeleton.called(this, this.getName(), "damage", "");
+
         bodyHeat--;
-        called(this, this.getName(), "damage", "");
+
     }
 
     public void worked() {
+        Skeleton.called(this, this.getName(), "worked", "");
+
         workPoints--;
-        called(this, this.getName(), "worked", "");
+
     }
 
     public void update() {
+        Skeleton.called(this, this.getName(), "update", "");
+
         this.workPoints = maxWorkPoints;
-        called(this, this.getName(), "update", "");
+
     }
 }
