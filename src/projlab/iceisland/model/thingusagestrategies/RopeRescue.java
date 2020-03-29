@@ -1,5 +1,6 @@
 package projlab.iceisland.model.thingusagestrategies;
 
+import projlab.iceisland.Skeleton;
 import projlab.iceisland.model.Player;
 
 import static projlab.iceisland.model.Thing.*;

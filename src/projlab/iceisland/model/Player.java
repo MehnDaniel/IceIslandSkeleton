@@ -14,6 +14,8 @@ public abstract class Player implements IActor {
     protected AbstractField currentField;
     protected IceIsland island;
     protected PlayerState currentState = PlayerState.Normal;
+    protected String name;
+
 //(this,getname),  szekvenciák alapján
     //enumoknál kevesebb paraméter
 public Player(int bodyHeat,
@@ -22,6 +24,7 @@ public Player(int bodyHeat,
               int maxWorkPoints,
               Thing thing) {
 
+    this.name = name;
     this.bodyHeat = bodyHeat;
     this.maxBodyHeat = maxBodyHeat;
     this.workPoints = workPoints;
@@ -30,8 +33,12 @@ public Player(int bodyHeat,
 }
 
 
-    public Player(int maxBodyHeat, int maxWorkPoints, Thing startingItem) {
-        this(maxBodyHeat, maxBodyHeat, maxWorkPoints, maxWorkPoints, startingItem);
+    public Player(String name, int maxBodyHeat, int maxWorkPoints, Thing startingItem) {
+        this(name, maxBodyHeat, maxBodyHeat, maxWorkPoints, maxWorkPoints, startingItem);
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void ate() {

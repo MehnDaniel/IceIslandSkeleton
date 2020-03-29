@@ -5,8 +5,8 @@ import projlab.iceisland.model.Thing;
 
 public class PolarExplorer extends Player {
 
-    public PolarExplorer(Thing startingItem) {
-        super(4, 4, startingItem);
+    public PolarExplorer(String name,Thing startingItem) {
+        super(name,4, 4, startingItem);
     }
 
     @Override
