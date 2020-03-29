@@ -33,15 +33,15 @@ public enum Thing {
         }
         @Override
         public void useForEating(Player who){
-            Skeleton.called(this, "Nothing", "useForEating", "who");
-            Skeleton.returned(this, "Nothing", "useForEating", "who");
+            Skeleton.called(this, "Nothing", "useForEating", who.toString());
+            Skeleton.returned(this, "Nothing", "useForEating", who.toString());
 
         }
 
         @Override
         void useForShooting(AbstractField from, IceIsland island) {
-            Skeleton.called(this, "Nothing", "useForShooting", "from, island");
-            Skeleton.returned(this, "Nothing", "useForShooting", "from, island");
+            Skeleton.called(this, "Nothing", "useForShooting", from.toString()+", "+island.toString());
+            Skeleton.returned(this, "Nothing", "useForShooting", from.toString()+", "+island.toString());
 
         }
 
@@ -73,16 +73,16 @@ public enum Thing {
 
         @Override
         public void useForEating(Player who){
-            Skeleton.called(this, "Food", "useForEating", "who");
+            Skeleton.called(this, "Food", "useForEating", who.toString());
             who.ate();
-            Skeleton.returned(this, "Food", "useForEating", "who");
+            Skeleton.returned(this, "Food", "useForEating", who.toString());
 
         }
 
         @Override
         void useForShooting(AbstractField from, IceIsland island) {
-            Skeleton.called(this, "Food", "useForShooting", "from, island");
-            Skeleton.returned(this, "Food", "useForShooting", "from, island");
+            Skeleton.called(this, "Food", "useForShooting", from.toString()+", "+island.toString());
+            Skeleton.returned(this, "Food", "useForShooting", from.toString()+", "+island.toString());
 
         }
     }, Shovel{
@@ -112,15 +112,15 @@ public enum Thing {
 
         @Override
         public void useForEating(Player who){
-            Skeleton.called(this, "Shovel", "useForEating", "who");
-            Skeleton.returned(this, "Shovel", "useForEating", "who");
+            Skeleton.called(this, "Shovel", "useForEating", who.toString());
+            Skeleton.returned(this, "Shovel", "useForEating", who.toString());
 
         }
 
         @Override
         void useForShooting(AbstractField from, IceIsland island) {
-            Skeleton.called(this, "Shovel", "useForShooting", "from, island");
-            Skeleton.returned(this, "Shovel", "useForShooting", "from, island");
+            Skeleton.called(this, "Shovel", "useForShooting", from.toString()+", "+island.toString());
+            Skeleton.returned(this, "Shovel", "useForShooting", from.toString()+", "+island.toString());
 
         }
     }, Scuba{
@@ -150,16 +150,16 @@ public enum Thing {
 
         @Override
         public void useForEating(Player who){
-            Skeleton.called(this, "Scuba", "useForEating", "who");
-            Skeleton.returned(this, "Scuba", "useForEating", "who");
+            Skeleton.called(this, "Scuba", "useForEating", who.toString());
+            Skeleton.returned(this, "Scuba", "useForEating", who.toString());
 
         }
 
 
         @Override
         void useForShooting(AbstractField from, IceIsland island) {
-            Skeleton.called(this, "Scuba", "useForShooting", "from, island");
-            Skeleton.returned(this, "Scuba", "useForShooting", "from, island");
+            Skeleton.called(this, "Scuba", "useForShooting", from.toString()+", "+island.toString());
+            Skeleton.returned(this, "Scuba", "useForShooting", from.toString()+", "+island.toString());
 
         }
     }, Rope{
@@ -189,15 +189,15 @@ public enum Thing {
 
         @Override
         public void useForEating(Player who){
-            Skeleton.called(this, "Rope", "useForEating", "who");
-            Skeleton.returned(this, "Rope", "useForEating", "who");
+            Skeleton.called(this, "Rope", "useForEating", who.toString());
+            Skeleton.returned(this, "Rope", "useForEating", who.toString());
 
         }
 
         @Override
         void useForShooting(AbstractField from, IceIsland island) {
-            Skeleton.called(this, "Rope", "useForShooting", "from, island");
-            Skeleton.returned(this, "Rope", "useForShooting", "from, island");
+            Skeleton.called(this, "Rope", "useForShooting", from.toString()+", "+island.toString());
+            Skeleton.returned(this, "Rope", "useForShooting", from.toString()+", "+island.toString());
 
         }
     }, FlareGun{
@@ -227,19 +227,19 @@ public enum Thing {
 
         @Override
         public void useForEating(Player who){
-            Skeleton.called(this, "FlareGun", "useForEating", "who");
-            Skeleton.returned(this, "FlareGun", "useForEating", "who");
+            Skeleton.called(this, "FlareGun", "useForEating", who.toString());
+            Skeleton.returned(this, "FlareGun", "useForEating", who.toString());
 
         }
 
         @Override
         void useForShooting(AbstractField from, IceIsland island) {
-            Skeleton.called(this, "FlareGun", "useForShooting", "from, island");
+            Skeleton.called(this, "FlareGun", "useForShooting", from.toString()+", "+island.toString());
             if(island.isAssembleFlareGunPossible(from)){
                 island.win();
             }
 
-            Skeleton.returned(this, "FlareGun", "useForShooting", "from, island");
+            Skeleton.returned(this, "FlareGun", "useForShooting", from.toString()+", "+island.toString());
 
         }
     }, Cartridge{
@@ -269,18 +269,18 @@ public enum Thing {
 
         @Override
         void useForEating(Player who) {
-            Skeleton.called(this, "Cartridge", "useForEating", "who");
-            Skeleton.returned(this, "Cartridge", "useForEating", "who");
+            Skeleton.called(this, "Cartridge", "useForEating", who.toString());
+            Skeleton.returned(this, "Cartridge", "useForEating", who.toString());
 
         }
 
         @Override
         void useForShooting(AbstractField from, IceIsland island) {
-            Skeleton.called(this, "Cartridge", "useForShooting", "from, island");
+            Skeleton.called(this, "Cartridge", "useForShooting", from.toString()+", "+island.toString());
             if(island.isAssembleFlareGunPossible(from)){
                 island.win();
             }
-            Skeleton.returned(this, "Cartridge", "useForShooting", "from, island");
+            Skeleton.returned(this, "Cartridge", "useForShooting", from.toString()+", "+island.toString());
 
         }
     }, Beacon{
@@ -310,19 +310,19 @@ public enum Thing {
 
         @Override
         public void useForEating(Player who){
-            Skeleton.called(this, "Beacon", "useForEating", "who");
-            Skeleton.returned(this, "Beacon", "useForEating", "who");
+            Skeleton.called(this, "Beacon", "useForEating", who.toString());
+            Skeleton.returned(this, "Beacon", "useForEating", who.toString());
 
         }
 
         @Override
         void useForShooting(AbstractField from, IceIsland island) {
-            Skeleton.called(this, "Beacon", "useForShooting", "from, island");
+            Skeleton.called(this, "Beacon", "useForShooting", from.toString()+", "+island.toString());
             if(island.isAssembleFlareGunPossible(from)){
                 island.win();
             }
 
-            Skeleton.returned(this, "Beacon", "useForShooting", "from, island");
+            Skeleton.returned(this, "Beacon", "useForShooting", from.toString()+", "+island.toString());
 
         }
     };

@@ -195,21 +195,21 @@ public Player(int bodyHeat,
     }
 
     public void setCurrentField(AbstractField field) {
-        Skeleton.called(this, this.getName(), "setCurrentField", "field");
+        Skeleton.called(this, this.getName(), "setCurrentField", field.toString());
 
         this.currentField.people.remove(this);
         this.currentField = field;
 
-        Skeleton.returned(this, this.getName(), "setCurrentField", "field");
+        Skeleton.returned(this, this.getName(), "setCurrentField", field.toString());
 
 }
 
     public void setIsland(IceIsland island) {
-        Skeleton.called(this, this.getName(), "setIsland", "island");
+        Skeleton.called(this, this.getName(), "setIsland", island.toString());
 
         this.island = island;
 
-        Skeleton.returned(this, this.getName(), "setIsland", "island");
+        Skeleton.returned(this, this.getName(), "setIsland", island.toString());
 
     }
 
